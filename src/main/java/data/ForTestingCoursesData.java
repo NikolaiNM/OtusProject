@@ -1,9 +1,12 @@
-package enums;
+package data;
 
 import org.openqa.selenium.By;
 
-public enum ForTestingCourse {
-    COURSE1(
+import java.util.List;
+
+public class ForTestingCoursesData {
+
+    public static final List<CourseData> COURSES = List.of(
             new CourseData(
                     By.cssSelector("h1.sc-1og4wiw-0.sc-s2pydo-1.iLVLDh.diGrSa"),
                     "Java QA Engineer. Professional",
@@ -14,9 +17,7 @@ public enum ForTestingCourse {
                     "4 месяца",
                     By.xpath("//div[@class='sc-3cb1l3-3 jeNzke']/descendant::p[position()=4]"),
                     "Онлайн"
-            )
-    ),
-    COURSE2(
+            ),
             new CourseData(
                     By.cssSelector("h1.sc-1og4wiw-0.sc-s2pydo-1.iLVLDh.diGrSa"),
                     "Python QA Engineer",
@@ -27,9 +28,7 @@ public enum ForTestingCourse {
                     "5 месяцев",
                     By.xpath("//div[@class='sc-3cb1l3-3 jeNzke']/descendant::p[position()=3]"),
                     "Онлайн"
-            )
-    ),
-    COURSE3(
+            ),
             new CourseData(
                     By.cssSelector("h1.sc-1og4wiw-0.sc-s2pydo-1.iLVLDh.diGrSa"),
                     "Game QA Engineer",
@@ -40,9 +39,7 @@ public enum ForTestingCourse {
                     "4 месяца",
                     By.xpath("//div[@class='sc-3cb1l3-3 jeNzke']/descendant::p[position()=3]"),
                     "Онлайн"
-            )
-    ),
-    COURSE4(
+            ),
             new CourseData(
                     By.cssSelector("h1.sc-1og4wiw-0.sc-s2pydo-1.iLVLDh.diGrSa"),
                     "Нагрузочное тестирование",
@@ -56,68 +53,8 @@ public enum ForTestingCourse {
             )
     );
 
-    private CourseData courseData;
-
-    ForTestingCourse(CourseData courseData) {
-        this.courseData = courseData;
-    }
-
-    public CourseData getCourseData() {
-        return courseData;
-    }
-
-    public static class CourseData {
-        private By nameSelector;
-        private String name;
-        private By descriptionSelector;
-        private String description;
-        private By durationSelector;
-        private String duration;
-        private By formatSelector;
-        private String format;
-
-        public CourseData(By nameSelector, String name, By descriptionSelector, String description,
-                          By durationSelector, String duration, By formatSelector, String format) {
-            this.nameSelector = nameSelector;
-            this.name = name;
-            this.descriptionSelector = descriptionSelector;
-            this.description = description;
-            this.durationSelector = durationSelector;
-            this.duration = duration;
-            this.formatSelector = formatSelector;
-            this.format = format;
-        }
-
-        public By getNameSelector() {
-            return nameSelector;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public By getDescriptionSelector() {
-            return descriptionSelector;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public By getDurationSelector() {
-            return durationSelector;
-        }
-
-        public String getDuration() {
-            return duration;
-        }
-
-        public By getFormatSelector() {
-            return formatSelector;
-        }
-
-        public String getFormat() {
-            return format;
-        }
+    // Получение данных курса по индексу
+    public static CourseData getCourseData(int index) {
+        return COURSES.get(index);
     }
 }

@@ -9,7 +9,7 @@ public enum WebDriverName {
     EDGE;
 
     public static WebDriverName fromSystemProperty() {
-        String browserName = System.getProperty("browser", "chrome").toUpperCase();
+        String browserName = System.getProperty("browser", "firefox").toUpperCase();
         try {
             return WebDriverName.valueOf(browserName);
         } catch (IllegalArgumentException e) {

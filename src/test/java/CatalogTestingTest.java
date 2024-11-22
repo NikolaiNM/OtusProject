@@ -1,4 +1,6 @@
-import enums.ForTestingCourse;
+import data.CourseData;
+//import enums.ForTestingCourse;
+import data.ForTestingCoursesData;
 import factory.WebDriverFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,14 +37,14 @@ public class CatalogTestingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 3})  // Пример с индексом 3
+    @ValueSource(ints = {0,3})  // Пример с индексом 3
     public void checkingCoursesCard(int index) {
         onPage.acceptCookies();
         onPage.clickShowMoreButton();
         onPage.clickElementByIndex(index);
 
-        // Получаем курс по индексу через метод getCourseData()
-        ForTestingCourse.CourseData course = onPage.getCourseData(index);
+        // Получаем данные курса по индексу из ForTestingCoursesData
+        CourseData course = ForTestingCoursesData.getCourseData(index);  // Используем правильный метод для получения данных
 
         // Проверяем текст для выбранного курса
         onPage.checkText(course.getNameSelector(), course.getName());

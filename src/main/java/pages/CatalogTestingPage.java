@@ -1,6 +1,8 @@
 package pages;
 
-import enums.ForTestingCourse;
+import data.CourseData;
+//import enums.ForTestingCourse;
+import data.ForTestingCoursesData;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -60,7 +62,7 @@ public class CatalogTestingPage extends AbsBasePage {
 
     public void countOfCourses() {
         assertCount(By.cssSelector(allCounts), numberOfCourses);
-        logger.info("Количество курсов равно {} и соответствует ожидаемому", allCounts);
+        logger.info("Количество курсов равно {} и соответствует ожидаемому", numberOfCourses);
     }
 
     public void clickElementByIndex(int index) {
@@ -84,8 +86,7 @@ public class CatalogTestingPage extends AbsBasePage {
         logger.info("Текст элемента соответствует ожидаемому значению \"{}\"", value);
     }
 
-    public ForTestingCourse.CourseData getCourseData(int index) {
-        ForTestingCourse courseEnum = ForTestingCourse.values()[index];
-        return courseEnum.getCourseData();
+    public CourseData getCourseData(int index) {
+        return ForTestingCoursesData.getCourseData(index);  // Теперь используем ForTestingCoursesData для получения данных
     }
 }
