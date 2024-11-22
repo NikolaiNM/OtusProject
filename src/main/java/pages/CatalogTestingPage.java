@@ -16,7 +16,6 @@ public class CatalogTestingPage extends AbsBasePage {
     private String showMoreButton = "button.sc-mrx253-0.enxKCy.sc-prqxfo-0.cXVWAS";
 
 
-
     public CatalogTestingPage(WebDriver driver) {
         super(driver);
     }
@@ -65,17 +64,13 @@ public class CatalogTestingPage extends AbsBasePage {
     }
 
     public void clickElementByIndex(int index) {
-        // Используем переменную класса allCounts для локатора
         List<WebElement> elements = findElements(By.cssSelector(allCounts));
 
-        // Проверяем, что индекс не выходит за пределы списка
         if (index >= 0 && index < elements.size()) {
             WebElement element = elements.get(index);
 
-            // Скроллим к элементу
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
 
-            // Кликаем по нужному элементу
             element.click();
         } else {
             logger.info("Некорректный индекс: " + index);
@@ -83,26 +78,14 @@ public class CatalogTestingPage extends AbsBasePage {
     }
 
     public void checkText(By selector, String value) {
-        // Ожидаем присутствие элемента в DOM
         WebElement element = webDriverWait.until(ExpectedConditions.presenceOfElementLocated(selector));
-
-        // Ожидаем, что элемент будет видимым
         webDriverWait.until(ExpectedConditions.visibilityOf(element));
-
-        // Проверяем, что текст элемента совпадает с ожидаемым значением
         Assertions.assertEquals(value, element.getText().trim());
-
-        // Логируем успешную проверку
         logger.info("Текст элемента соответствует ожидаемому значению \"{}\"", value);
     }
 
     public ForTestingCourse.CourseData getCourseData(int index) {
-        // Получаем курс по индексу
         ForTestingCourse courseEnum = ForTestingCourse.values()[index];
         return courseEnum.getCourseData();
-    }
-
-    public WebElement getElement(By selector) {
-        return driver.findElement(selector);
     }
 }

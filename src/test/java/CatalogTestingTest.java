@@ -18,8 +18,6 @@ public class CatalogTestingTest {
         this.driver = WebDriverFactory.create();
         this.onPage = new CatalogTestingPage(driver);
         onPage.open("/categories/testing/");
-        //onPage.open("/catalog/courses?categories=programming");
-        //onPage.open("/catalog/courses?categories=gamedev&difficulty_levels=advanced");
     }
 
     @AfterEach
@@ -37,7 +35,7 @@ public class CatalogTestingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0,3})  // Пример с индексом 3
+    @ValueSource(ints = {0, 3})  // Пример с индексом 3
     public void checkingCoursesCard(int index) {
         onPage.acceptCookies();
         onPage.clickShowMoreButton();
