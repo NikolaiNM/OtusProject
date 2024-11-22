@@ -2,6 +2,7 @@ import enums.ForTestingCourse;
 import factory.WebDriverFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
@@ -28,23 +29,22 @@ public class CatalogTestingTest {
         }
     }
 
-//    @Test
-//    public void countCourses() {
-//        onPage.acceptCookies();
-//        onPage.clickShowMoreButton();
-//        onPage.countOfCourses();
-//    }
+    @Test
+    public void countCourses() {
+        onPage.acceptCookies();
+        onPage.clickShowMoreButton();
+        onPage.countOfCourses();
+    }
 
     @ParameterizedTest
-    @ValueSource(ints = {3})
+    @ValueSource(ints = {0,3})  // Пример с индексом 3
     public void checkingCoursesCard(int index) {
         onPage.acceptCookies();
         onPage.clickShowMoreButton();
         onPage.clickElementByIndex(index);
 
-        // Получаем курс по индексу
-        ForTestingCourse courseEnum = ForTestingCourse.values()[index];
-        ForTestingCourse.CourseData course = courseEnum.getCourseData();
+        // Получаем курс по индексу через метод getCourseData()
+        ForTestingCourse.CourseData course = onPage.getCourseData(index);
 
         // Проверяем текст для выбранного курса
         onPage.checkText(course.getNameSelector(), course.getName());

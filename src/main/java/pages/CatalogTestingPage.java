@@ -1,5 +1,6 @@
 package pages;
 
+import enums.ForTestingCourse;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -93,6 +94,12 @@ public class CatalogTestingPage extends AbsBasePage {
 
         // Логируем успешную проверку
         logger.info("Текст элемента соответствует ожидаемому значению \"{}\"", value);
+    }
+
+    public ForTestingCourse.CourseData getCourseData(int index) {
+        // Получаем курс по индексу
+        ForTestingCourse courseEnum = ForTestingCourse.values()[index];
+        return courseEnum.getCourseData();
     }
 
     public WebElement getElement(By selector) {
