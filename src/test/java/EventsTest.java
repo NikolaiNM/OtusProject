@@ -14,13 +14,16 @@ public class EventsTest {
     private String typeEvents = "a.dod_new-events-dropdown__list-item[title='Открытый вебинар']";
     private String calendarOfEvents = "a[href='https://otus.ru/events/near']";
     private String buttonMenu = "button.sc-5n5sda-0.exrzoV";
-    //private String loader = "div.dod_new-loader-wrapper.dod_new-loader-wrapper_visible";
+    //private String allOpenVibinar = "div.dod_new-type__text";
+    private String typeVibinar = "Открытый вебинар";
+
 
     @BeforeEach
     public void init() {
         this.driver = WebDriverFactory.create();
         this.onPage = new EventsPage(driver);
         onPage.open("");
+        //onPage.open("/events/near/");
         onPage.cookieAccess();
 
     }
@@ -39,6 +42,7 @@ public class EventsTest {
         onPage.clickButton(allTypes);
         onPage.clickButton(typeEvents);
         onPage.scrollToEnd();
+        onPage.checkTextInElements(typeVibinar);
 
 //    }
 //    @Test
