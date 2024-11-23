@@ -20,6 +20,7 @@ public class CatalogTestingTest {
         this.driver = WebDriverFactory.create();
         this.onPage = new CatalogTestingPage(driver);
         onPage.open("/categories/testing/");
+        onPage.setCookieAccept();
     }
 
     @AfterEach
@@ -31,7 +32,6 @@ public class CatalogTestingTest {
 
     @Test
     public void countCourses() {
-        onPage.acceptCookies();
         onPage.clickShowMoreButton();
         onPage.countOfCourses();
     }
@@ -39,7 +39,6 @@ public class CatalogTestingTest {
     @ParameterizedTest
     @ValueSource(ints = {0,3})
     public void checkingCoursesCard(int index) {
-        onPage.acceptCookies();
         onPage.clickShowMoreButton();
         onPage.clickElementByIndex(index);
 

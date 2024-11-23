@@ -2,35 +2,33 @@ package pages;
 
 import common.AbsCommon;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class AbsBasePage extends AbsCommon {
 
     private final String BASE_URL;
-    private String okCookiesButton = "button.sc-9a4spb-0.izekQs";
 
     public AbsBasePage(WebDriver driver) {
         super(driver);
         this.BASE_URL = System.getProperty("base.url", "https://otus.ru");
     }
 
-
-    public void acceptCookies() {
-        By okButtonLocator = By.cssSelector(okCookiesButton);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public void setCookieAccept() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.localStorage.setItem('cookieAccess', 'true');");
+        logger.info("Куки приняты");
+        js.executeScript("location.reload();");
 
         try {
-            WebElement okButton = wait.until(ExpectedConditions.elementToBeClickable(okButtonLocator));
-            okButton.click();
-            logger.info("Куки приняты");
-        } catch (Exception e) {
-            logger.info("Ошибка при попытке принять куки: " + e.getMessage());
+            Thread.sleep(2500);
+            logger.info("Ожидание 2 секунда после перезагрузки страницы.");
+        } catch (InterruptedException e) {
+            logger.info("Ошибка при ожидании паузы: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
