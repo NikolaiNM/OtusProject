@@ -53,7 +53,6 @@ public class ForTestingCoursesData {
             )
     );
 
-    // Получение данных курса по индексу
     public static CourseData getCourseData(int index) {
         return COURSES.get(index);
     }

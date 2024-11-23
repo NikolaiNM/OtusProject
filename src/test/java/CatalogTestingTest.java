@@ -37,16 +37,14 @@ public class CatalogTestingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0,3})  // Пример с индексом 3
+    @ValueSource(ints = {0,3})
     public void checkingCoursesCard(int index) {
         onPage.acceptCookies();
         onPage.clickShowMoreButton();
         onPage.clickElementByIndex(index);
 
-        // Получаем данные курса по индексу из ForTestingCoursesData
-        CourseData course = ForTestingCoursesData.getCourseData(index);  // Используем правильный метод для получения данных
+        CourseData course = ForTestingCoursesData.getCourseData(index);
 
-        // Проверяем текст для выбранного курса
         onPage.checkText(course.getNameSelector(), course.getName());
         onPage.checkText(course.getDescriptionSelector(), course.getDescription());
         onPage.checkText(course.getDurationSelector(), course.getDuration());
