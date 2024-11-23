@@ -1,6 +1,7 @@
 import factory.WebDriverFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pages.EventsPage;
 
@@ -9,12 +10,18 @@ public class EventsTest {
     private WebDriver driver;
     private EventsPage onPage;
 
+    private String allTypes = "span.dod_new-events-dropdown__input-selected";
+    private String typeEvents = "a.dod_new-events-dropdown__list-item[title='Открытый вебинар']";
+    private String calendarOfEvents = "a[href='https://otus.ru/events/near']";
+    private String buttonMenu = "button.sc-5n5sda-0.exrzoV";
+    //private String loader = "div.dod_new-loader-wrapper.dod_new-loader-wrapper_visible";
+
     @BeforeEach
     public void init() {
         this.driver = WebDriverFactory.create();
         this.onPage = new EventsPage(driver);
-        onPage.open("/events/near/open_lesson/");
-        onPage.setCookieAccept();
+        onPage.open("");
+        onPage.cookieAccess();
 
     }
 
@@ -25,12 +32,19 @@ public class EventsTest {
         }
     }
 
-//    @Test
-//    public void checkDate() {
-//
-//    }
+    @Test
+    public void checkDate() {
+        onPage.clickButton(buttonMenu);
+        onPage.clickButton(calendarOfEvents);
+        onPage.clickButton(allTypes);
+        onPage.clickButton(typeEvents);
+        onPage.scrollToEnd();
 
-//    <div class="dod_new-loader-wrapper js-dod_new-loader-wrapper dod_new-loader-wrapper_visible">
-//                    <div class="dod_new-loader"></div>
-//                </div>
+//    }
+//    @Test
+//    public void test2() {
+//        onPage.scrollToEnd();
+//    }
+//
+    }
 }

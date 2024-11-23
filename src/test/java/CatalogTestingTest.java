@@ -1,5 +1,5 @@
-import data.CourseData;
 //import enums.ForTestingCourse;
+import data.CourseData;
 import data.ForTestingCoursesData;
 import factory.WebDriverFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -20,7 +20,7 @@ public class CatalogTestingTest {
         this.driver = WebDriverFactory.create();
         this.onPage = new CatalogTestingPage(driver);
         onPage.open("/categories/testing/");
-        onPage.setCookieAccept();
+        onPage.cookieAccess();
     }
 
     @AfterEach
