@@ -1,4 +1,3 @@
-//import enums.ForTestingCourse;
 import data.CourseData;
 import data.ForTestingCoursesData;
 import factory.WebDriverFactory;
@@ -15,11 +14,13 @@ public class CatalogTestingTest {
     private WebDriver driver;
     private CatalogTestingPage onPage;
 
+    private final String PAGE_URL = "/categories/testing/";
+
     @BeforeEach
     public void init() {
         this.driver = WebDriverFactory.create();
         this.onPage = new CatalogTestingPage(driver);
-        onPage.open("/categories/testing/");
+        onPage.open(PAGE_URL);
         onPage.cookieAccess();
     }
 
@@ -31,14 +32,14 @@ public class CatalogTestingTest {
     }
 
     @Test
-    public void countCourses() {
+    public void test1() {
         onPage.clickShowMoreButton();
         onPage.countOfCourses();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0,3})
-    public void checkingCoursesCard(int index) {
+    public void test2(int index) {
         onPage.clickShowMoreButton();
         onPage.clickElementByIndex(index);
 

@@ -10,20 +10,20 @@ public class EventsTest {
     private WebDriver driver;
     private EventsPage onPage;
 
-    private String allTypes = "span.dod_new-events-dropdown__input-selected";
-    private String typeEvents = "a.dod_new-events-dropdown__list-item[title='Открытый вебинар']";
-    private String calendarOfEvents = "a[href='https://otus.ru/events/near']";
-    private String buttonMenu = "button.sc-5n5sda-0.exrzoV";
-    //private String allOpenVibinar = "div.dod_new-type__text";
-    private String typeVibinar = "Открытый вебинар";
+    private final String allTypes = "span.dod_new-events-dropdown__input-selected";
+    private final String typeEvents = "a.dod_new-events-dropdown__list-item[title='Открытый вебинар']";
+    private final String calendarOfEvents = "a[href='https://otus.ru/events/near']";
+    private final String buttonMenu = "button.sc-5n5sda-0.exrzoV";
+    private final String typeVibinar = "Открытый вебинар";
+
+    private final String PAGE_URL = "";
 
 
     @BeforeEach
     public void init() {
         this.driver = WebDriverFactory.create();
         this.onPage = new EventsPage(driver);
-        onPage.open("");
-        //onPage.open("/events/near/");
+        onPage.open(PAGE_URL);
         onPage.cookieAccess();
 
     }
@@ -36,19 +36,24 @@ public class EventsTest {
     }
 
     @Test
-    public void checkDate() {
+    public void test4() {
         onPage.clickButton(buttonMenu);
         onPage.clickButton(calendarOfEvents);
         onPage.clickButton(allTypes);
         onPage.clickButton(typeEvents);
         onPage.scrollToEnd();
         onPage.checkTextInElements(typeVibinar);
-
-//    }
-//    @Test
-//    public void test2() {
-//        onPage.scrollToEnd();
-//    }
-//
     }
+
+    @Test
+    public void test3() {
+        onPage.clickButton(buttonMenu);
+        onPage.clickButton(calendarOfEvents);
+        onPage.clickButton(allTypes);
+        onPage.clickButton(typeEvents);
+        onPage.scrollToEnd();
+        onPage.checkDatesInElements();
+    }
+
+
 }

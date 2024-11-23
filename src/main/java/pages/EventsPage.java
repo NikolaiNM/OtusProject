@@ -3,11 +3,14 @@ package pages;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class EventsPage extends AbsBasePage {
 
-    private String checkingTypeOfVibinar = "//div[@class='dod_new-type__text']";
+    private final String checkingTypeOfVibinar = "//div[@class='dod_new-type__text']";
+    private final String checkingDateOfVibinar = "//span[@class='dod_new-event__date-text']";
 
     public EventsPage(WebDriver driver) {
         super(driver);
@@ -50,6 +53,37 @@ public class EventsPage extends AbsBasePage {
             }
         }
         logger.info("Все элементы содержат правильный текст '" + expectedText + "'");
+    }
+
+    public void checkDatesInElements() {
+        List<WebElement> dateElements = driver.findElements(By.xpath(checkingDateOfVibinar));
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy");// Формат: "25 ноября 2024"
+        LocalDate currentDate = LocalDate.now();// Получаем текущую дату
+        logger.info("Текущая дата: " + currentDate);
+
+        for (int i = 0; i < dateElements.size(); i += 2 ) {
+            WebElement dateElement = dateElements.get(i);
+            String dateText = dateElement.getText().trim();// Получаем только дату
+            LocalDate eventDate = parseDate(dateText, dateFormatter);// Преобразуем в формат d MMMM yyyy
+            if (eventDate == null || eventDate.isBefore(currentDate)) {
+                logger.info("Ошибка: Элемент с индексом " + (i + 1) + " содержит дату '" + dateText +
+                        "', которая раньше сегодняшней: '" + currentDate + "'.");
+                Assertions.fail("Дата элемента на индексе " + (i + 1) + " '" + dateText + "' меньше текущей даты '" + currentDate + "'.");
+            }
+        }
+        logger.info("Все даты на плитках не старше сегодняшней.");
+    }
+
+    private LocalDate parseDate(String dateText, DateTimeFormatter formatter) {
+        try {
+            int currentYear = LocalDate.now().getYear();// Получаем текущий год
+            String fullDateText = dateText + " " + currentYear;// Добавляем год к дате
+            LocalDate parsedDate = LocalDate.parse(fullDateText, formatter);// Парсим в гггг-мм-дд
+            return parsedDate;
+        } catch (Exception e) {
+            logger.info("Ошибка при парсинге даты: " + dateText);
+            return null;
+        }
     }
 
 }
