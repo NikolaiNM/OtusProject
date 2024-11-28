@@ -35,9 +35,6 @@ public class CatalogTestingPage extends AbsBasePage {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", showMoreButton);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", showMoreButton);
                 logger.info("Нажали на кнопку 'Показать еще' через JavaScript");
-
-                Thread.sleep(1000);
-
                 try {
                     WebElement refreshedButton = driver.findElement(showMoreButtonLocator);
                     if (!refreshedButton.isDisplayed()) {
