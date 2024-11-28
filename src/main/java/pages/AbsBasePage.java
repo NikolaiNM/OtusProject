@@ -36,17 +36,11 @@ public abstract class AbsBasePage extends AbsCommon {
         }
     }
 
-
-
     public void clickButton(String cssSelector) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
             WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector)));
-
-            // Прокрутка с учётом смещения (50 пикселей вниз от позиции элемента)
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true); window.scrollBy(0, -200);", button);
-
-            // Клик по элементу
             button.click();
             logger.info("Кнопка с селектором '" + cssSelector + "' успешно нажата.");
         } catch (Exception e) {
@@ -54,7 +48,6 @@ public abstract class AbsBasePage extends AbsCommon {
             e.printStackTrace();
         }
     }
-
 
     public void open(String path) {
         driver.get(BASE_URL + path);

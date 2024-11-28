@@ -15,7 +15,6 @@ public class CatalogTestingTest {
     private CatalogTestingPage onPage;
 
 
-
     @BeforeEach
     public void init() {
         this.driver = WebDriverFactory.create();
@@ -38,7 +37,7 @@ public class CatalogTestingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0,3})
+    @ValueSource(ints = {0, 3})
     public void checkingContentsOfCourseCard(int index) {
         onPage.clickShowMoreButton();
         onPage.clickElementByIndex(index);
@@ -50,6 +49,5 @@ public class CatalogTestingTest {
         onPage.checkText(course.getDurationSelector(), course.getDuration());
         onPage.checkText(course.getFormatSelector(), course.getFormat());
     }
-
 }
 
