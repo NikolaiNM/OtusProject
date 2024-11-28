@@ -36,7 +36,7 @@ public class EventsTest {
     }
 
     @Test
-    public void test4() {
+    public void checkingTypesOfEvents() {
         onPage.clickButton(buttonMenu);
         onPage.clickButton(calendarOfEvents);
         onPage.clickButton(allTypes);
@@ -46,7 +46,7 @@ public class EventsTest {
     }
 
     @Test
-    public void test3() {
+    public void validationOfDatesEvents() {
         onPage.clickButton(buttonMenu);
         onPage.clickButton(calendarOfEvents);
         onPage.clickButton(allTypes);

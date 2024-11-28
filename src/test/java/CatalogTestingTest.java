@@ -32,14 +32,14 @@ public class CatalogTestingTest {
     }
 
     @Test
-    public void test1() {
+    public void checkingNumberOfCourses() {
         onPage.clickShowMoreButton();
         onPage.countOfCourses();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0,3})
-    public void test2(int index) {
+    public void checkingContentsOfCourseCard(int index) {
         onPage.clickShowMoreButton();
         onPage.clickElementByIndex(index);
 
