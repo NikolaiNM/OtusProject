@@ -1,8 +1,5 @@
 package pages;
 
-import data.CourseData;
-//import enums.ForTestingCourse;
-import data.ForTestingCoursesData;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,13 +10,19 @@ import java.util.List;
 
 public class CatalogTestingPage extends AbsBasePage {
 
-    private int numberOfCourses = 11;
-    private String allCounts = "div.sc-18q05a6-1.bwGwUO [class^=\"sc-zzdkm7-0\"]";
-    private String showMoreButton = "button.sc-mrx253-0.enxKCy.sc-prqxfo-0.cXVWAS";
+    private final String PAGE_URL = "/categories/testing/";
+
+    private final int numberOfCourses = 11;
+    private final String allCounts = "div.sc-18q05a6-1.bwGwUO [class^=\"sc-zzdkm7-0\"]";
+    private final String showMoreButton = "button.sc-mrx253-0.enxKCy.sc-prqxfo-0.cXVWAS";
 
 
     public CatalogTestingPage(WebDriver driver) {
         super(driver);
+    }
+
+    public void openPage() {
+        open(PAGE_URL);
     }
 
     public void clickShowMoreButton() {
@@ -86,7 +89,5 @@ public class CatalogTestingPage extends AbsBasePage {
         logger.info("Текст элемента соответствует ожидаемому значению \"{}\"", value);
     }
 
-    public CourseData getCourseData(int index) {
-        return ForTestingCoursesData.getCourseData(index);  // Теперь используем ForTestingCoursesData для получения данных
-    }
+
 }

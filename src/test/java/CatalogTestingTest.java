@@ -14,13 +14,13 @@ public class CatalogTestingTest {
     private WebDriver driver;
     private CatalogTestingPage onPage;
 
-    private final String PAGE_URL = "/categories/testing/";
+
 
     @BeforeEach
     public void init() {
         this.driver = WebDriverFactory.create();
         this.onPage = new CatalogTestingPage(driver);
-        onPage.open(PAGE_URL);
+        onPage.openPage();
         onPage.cookieAccess();
     }
 
